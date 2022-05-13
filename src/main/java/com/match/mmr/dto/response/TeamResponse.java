@@ -1,5 +1,6 @@
-package com.match.mmr.dto;
+package com.match.mmr.dto.response;
 
+import com.match.mmr.dto.Team;
 import lombok.AllArgsConstructor;
 
 import java.util.List;

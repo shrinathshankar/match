@@ -1,6 +1,5 @@
 package com.match.mmr.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,12 +8,12 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "player_data")
 public class Player {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     @Column(name = "password")
     private String password;
@@ -23,4 +22,10 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public Player(String name, String username, String password, Double rating) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.rating = rating;
+    }
 }

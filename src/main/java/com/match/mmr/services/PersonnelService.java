@@ -2,6 +2,7 @@ package com.match.mmr.services;
 
 import com.match.mmr.dto.Player;
 import com.match.mmr.dto.Team;
+import com.match.mmr.dto.request.PlayerRequest;
 import com.match.mmr.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Service
 public class PersonnelService {
+
+    private Double DEFAULT_RATING = 1000.0;
 
     private PlayerRepository playerRepository;
 
@@ -27,5 +30,10 @@ public class PersonnelService {
             teams.add(new Team(players.get(i), players.get(players.size() - 1 - i)));
         }
             return teams;
-        }
+    }
+
+    public void addPlayer(PlayerRequest playerRequest) {
+        Player player = new Player(playerRequest.getName(), playerRequest.getUsername(), playerRequest.getPassword(), DEFAULT_RATING);
+        playerRepository.save(player);
+    }
 }

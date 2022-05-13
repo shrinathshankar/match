@@ -1,5 +1,6 @@
-package com.match.mmr.dto;
+package com.match.mmr.dto.response;
 
+import com.match.mmr.dto.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TeamRequest {
-    private List<String> players;
+public class PlayersResponse {
+    List<Player> players;
 }
