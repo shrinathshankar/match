@@ -26,8 +26,8 @@ public class PlayerController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<PlayersResponse> findPlayer() {
-
+    public ResponseEntity<PlayersResponse> findPlayer(PlayerRequest playerRequest) {
+        return ResponseEntity.ok().body(new PlayersResponse(personnelService.getPlayer(playerRequest)));
     }
 
 }

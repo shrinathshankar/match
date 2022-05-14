@@ -36,4 +36,8 @@ public class PersonnelService {
         Player player = new Player(playerRequest.getName(), playerRequest.getUsername(), playerRequest.getPassword(), DEFAULT_RATING);
         playerRepository.save(player);
     }
+
+    public List<Player> getPlayer(PlayerRequest request) {
+        return playerRepository.findByNameAndUsername(request.getName(), request.getUsername());
+    }
 }
