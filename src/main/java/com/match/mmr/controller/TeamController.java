@@ -1,8 +1,8 @@
 package com.match.mmr.controller;
 
 
-import com.match.mmr.dto.request.TeamRequest;
-import com.match.mmr.dto.response.TeamResponse;
+import com.match.mmr.model.request.TeamRequest;
+import com.match.mmr.model.response.TeamResponse;
 import com.match.mmr.services.PersonnelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

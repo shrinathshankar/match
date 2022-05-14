@@ -1,5 +1,6 @@
-package com.match.mmr.dto;
+package com.match.mmr.model;
 
+import com.match.mmr.model.entity.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

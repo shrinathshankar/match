@@ -1,4 +1,4 @@
-package com.match.mmr.dto.request;
+package com.match.mmr.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

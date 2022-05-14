@@ -1,4 +1,4 @@
-package com.match.mmr.dto.request;
+package com.match.mmr.model.request;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;

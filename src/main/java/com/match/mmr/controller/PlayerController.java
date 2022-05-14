@@ -1,7 +1,7 @@
 package com.match.mmr.controller;
 
-import com.match.mmr.dto.request.PlayerRequest;
-import com.match.mmr.dto.response.PlayersResponse;
+import com.match.mmr.model.request.PlayerRequest;
+import com.match.mmr.model.response.PlayersResponse;
 import com.match.mmr.services.PersonnelService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

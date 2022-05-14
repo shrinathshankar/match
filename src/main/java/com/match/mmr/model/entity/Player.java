@@ -1,4 +1,4 @@
-package com.match.mmr.dto;
+package com.match.mmr.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,9 @@ public class Player {
     private String password;
     @Column(name = "rating")
     private Double rating;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_id")
     private long id;
 
     public Player(String name, String username, String password, Double rating) {

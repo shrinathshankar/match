@@ -1,6 +1,6 @@
-package com.match.mmr.dto.request;
+package com.match.mmr.model.request;
 
-import com.match.mmr.dto.Team;
+import com.match.mmr.model.Team;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

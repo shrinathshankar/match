@@ -1,8 +1,8 @@
 package com.match.mmr.services;
 
-import com.match.mmr.dto.Player;
-import com.match.mmr.dto.Team;
-import com.match.mmr.dto.request.PlayerRequest;
+import com.match.mmr.model.entity.Player;
+import com.match.mmr.model.Team;
+import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
