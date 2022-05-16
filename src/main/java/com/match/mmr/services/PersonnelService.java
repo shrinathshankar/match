@@ -1,7 +1,8 @@
 package com.match.mmr.services;
 
-import com.match.mmr.model.entity.Player;
+import com.google.common.collect.ImmutableList;
 import com.match.mmr.model.Team;
+import com.match.mmr.model.entity.Player;
 import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,9 @@ public class PersonnelService {
 
     public List<Player> getPlayer(PlayerRequest request) {
         return playerRepository.findByNameAndUsername(request.getName(), request.getUsername());
+    }
+
+    public List<Player> getAll() {
+        return ImmutableList.copyOf(playerRepository.findAll().iterator());
     }
 }

@@ -27,4 +27,9 @@ public class PlayerController {
         return ResponseEntity.ok().body(new PlayersResponse(personnelService.getPlayer(playerRequest)));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<PlayersResponse> findPlayers() {
+        return ResponseEntity.ok().body(new PlayersResponse(personnelService.getAll()));
+    }
+
 }
