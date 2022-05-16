@@ -5,10 +5,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @NoArgsConstructor
 @Table(name = "player_data")
+@Entity
 public class Player {
 
     @Column(name = "name")
@@ -20,6 +20,7 @@ public class Player {
     @Column(name = "rating")
     private Double rating;
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
     private long id;

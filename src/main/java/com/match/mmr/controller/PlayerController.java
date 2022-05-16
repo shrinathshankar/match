@@ -4,10 +4,7 @@ import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.model.response.PlayersResponse;
 import com.match.mmr.services.PersonnelService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/player")
@@ -20,13 +17,13 @@ public class PlayerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Integer> addPlayer(PlayerRequest playerRequest) {
+    public ResponseEntity<Integer> addPlayer(@RequestBody PlayerRequest playerRequest) {
         personnelService.addPlayer(playerRequest);
         return ResponseEntity.ok().body(200);
     }
 
     @GetMapping("/find")
-    public ResponseEntity<PlayersResponse> findPlayer(PlayerRequest playerRequest) {
+    public ResponseEntity<PlayersResponse> findPlayer(@RequestBody PlayerRequest playerRequest) {
         return ResponseEntity.ok().body(new PlayersResponse(personnelService.getPlayer(playerRequest)));
     }
 
