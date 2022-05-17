@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.match.mmr.services.Calculator.*;
+
 @Service
 public class PersonnelService {
 
@@ -28,9 +30,24 @@ public class PersonnelService {
         List<Team> teams = new ArrayList<>();
         players.sort(Comparator.comparing(Player::getRating));
         for (int i = 0; i < players.size()/2; i++) {
-            teams.add(new Team(players.get(i), players.get(players.size() - 1 - i)));
+            teams.add(new Team(players.get(i), players.get(players.size() - 1 - i), false));
         }
             return teams;
+    }
+
+    public void newRating(Team one, Team two) {
+
+        // will make a change to the way games are stored so this repeat isn't needed
+        double change = changeInRating(one, two);
+        one.getPlayerOne().setRating(rating(one.getPlayerOne().getRating(), change, one.isWin()));
+        one.getPlayerTwo().setRating(rating(one.getPlayerTwo().getRating(), change, one.isWin()));
+        two.getPlayerOne().setRating(rating(two.getPlayerOne().getRating(), change, two.isWin()));
+        two.getPlayerOne().setRating(rating(two.getPlayerTwo().getRating(), change, two.isWin()));
+        playerRepository.save(one.getPlayerOne());
+        playerRepository.save(one.getPlayerTwo());
+        playerRepository.save(two.getPlayerOne());
+        playerRepository.save(two.getPlayerTwo());
+
     }
 
     public void addPlayer(PlayerRequest playerRequest) {

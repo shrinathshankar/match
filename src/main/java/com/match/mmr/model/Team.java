@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Team {
 
-    private Player one;
-    private Player two;
+    private Player playerOne;
+    private Player playerTwo;
+    private boolean win;
 }
