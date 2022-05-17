@@ -1,0 +1,3 @@
+2022-05-16 13:34:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PLAYER_DATA" not found; SQL statement:
+insert into player_data (player_id, name, password, rating, username) values (default, ?, ?, ?, ?) [42102-200]
