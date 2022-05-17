@@ -35,18 +35,15 @@ public class PersonnelService {
             return teams;
     }
 
-    public void newRating(Team one, Team two) {
+    public void newRating(List<Team> teams) {
 
-        // will make a change to the way games are stored so this repeat isn't needed
-        double change = changeInRating(one, two);
-        one.getPlayerOne().setRating(rating(one.getPlayerOne().getRating(), change, one.isWin()));
-        one.getPlayerTwo().setRating(rating(one.getPlayerTwo().getRating(), change, one.isWin()));
-        two.getPlayerOne().setRating(rating(two.getPlayerOne().getRating(), change, two.isWin()));
-        two.getPlayerOne().setRating(rating(two.getPlayerTwo().getRating(), change, two.isWin()));
-        playerRepository.save(one.getPlayerOne());
-        playerRepository.save(one.getPlayerTwo());
-        playerRepository.save(two.getPlayerOne());
-        playerRepository.save(two.getPlayerTwo());
+        double change = changeInRating(teams.get(0), teams.get(1));
+        teams.forEach(team -> {
+            team.getPlayerOne().setRating(rating(team.getPlayerOne().getRating(), change, team.isWin()));
+            team.getPlayerTwo().setRating(rating(team.getPlayerTwo().getRating(), change, team.isWin()));
+            playerRepository.save(team.getPlayerOne());
+            playerRepository.save(team.getPlayerTwo());
+        });
 
     }
 

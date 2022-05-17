@@ -28,7 +28,7 @@ public class TeamController {
     @PutMapping("/game")
     @ResponseStatus(code = HttpStatus.OK)
     public void resolveGame(@RequestBody GameRequest gameRequest) {
-        personnelService.newRating(gameRequest.getTeams().get(0), gameRequest.getTeams().get(1));
+        personnelService.newRating(gameRequest.getTeams());
     }
 
 
