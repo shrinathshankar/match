@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +18,9 @@ public class Player {
     private Double rating;
     @ManyToOne
     private User user;
+
+    @ManyToMany
+    private List<Ladder> ladders;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

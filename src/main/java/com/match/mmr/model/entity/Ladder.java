@@ -11,17 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Match {
-
-    @Id
-    @Column(name = "match_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long matchId;
+public class Ladder {
 
     @ManyToMany
-    private List<Team> teams;
-
-    @ManyToOne
-    private Ladder ladders;
+    private List<Player> players;
+    @OneToMany
+    private List<Match> matches;
+    @Id
+    @Column(name = "ladder_id")
+    private Long ladderId;
 
 }
