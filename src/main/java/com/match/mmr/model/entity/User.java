@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -23,6 +24,9 @@ public class User {
     private String password;
     @Column(name = "email", unique = true)
     private String email;
+
+    @OneToMany
+    private List<Ladder> ladderList;
 
     public User(String username, String password, String email) {
         this.username = username;

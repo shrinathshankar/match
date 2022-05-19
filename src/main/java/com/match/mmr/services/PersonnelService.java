@@ -2,11 +2,9 @@ package com.match.mmr.services;
 
 import com.google.common.collect.ImmutableList;
 import com.match.mmr.model.TeamDto;
-import com.match.mmr.model.entity.Match;
-import com.match.mmr.model.entity.Player;
-import com.match.mmr.model.entity.Team;
-import com.match.mmr.model.entity.User;
+import com.match.mmr.model.entity.*;
 import com.match.mmr.model.request.GameRequest;
+import com.match.mmr.model.request.LadderRequest;
 import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.model.request.UserRequest;
 import com.match.mmr.repository.MatchRepository;
@@ -97,5 +95,14 @@ public class PersonnelService {
 
     public void addMatch(GameRequest gameRequest) {
         matchRepository.save(modelMapper.map(gameRequest, Match.class));
+    }
+
+    public void createLadder(LadderRequest ladderRequest) {
+        Ladder ladder = new Ladder();
+        ladder.setOwner(userRepository.findByUsername(ladderRequest.getUsername()));
+        List<Player> players = new ArrayList<>();
+        ladderRequest.getPlayerNames().forEach(name ->
+                players.add(new Player(name, DEFAULT_RATING)));
+        ladder.setPlayers(players);
     }
 }

@@ -31,6 +31,9 @@ public class Player {
         this.name = name;
         this.rating = rating;
         this.user = user;
-
+    }
+    public Player(String name, Double rating) {
+        this.name = name;
+        this.rating = rating;
     }
 }
