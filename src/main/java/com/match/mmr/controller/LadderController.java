@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -27,13 +28,22 @@ public class LadderController {
     public void createLadder(@RequestBody LadderRequest ladderRequest){
         personnelService.createLadder(ladderRequest);
     }
-    @GetMapping
-    public ResponseEntity<Ladder> getLadder(@RequestParam long id){
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Ladder> getLadder(@PathVariable long id){
         Optional<Ladder> optionalLadder = ladderRepository.findById(id);
         return optionalLadder.map(ladder -> ResponseEntity.status(HttpStatus.OK).body(ladder)).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Ladder()));
     }
+
     @GetMapping("/all")
     public ResponseEntity<List<Ladder>> getLadderList(){
         return ResponseEntity.status(HttpStatus.OK).body(ladderRepository.findAll());
+    }
+    
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<List<Ladder>> getLaddersByOwner(@PathVariable long ownerId) {
+        List<Ladder> ladders = new ArrayList<>();
+        Optional<List<Ladder>> optionalLadder = ladderRepository.findByOwner(ownerId);
+        return optionalLadder.map(ladder -> ResponseEntity.status(HttpStatus.OK).body(ladder)).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ladders));
     }
 }
