@@ -93,6 +93,17 @@ public class PersonnelService {
         return true;
     }
 
+    public boolean findUser(UserRequest userRequest) {
+        try {
+            User user = userRepository.findByUsername(userRequest.getUsername());
+            if (user.getPassword().equals(userRequest.getPassword()))
+                return true;
+        } catch (Exception e) {
+            log.error("Could not find user with username: {} and matching password", userRequest.getUsername());
+        }
+        return false;
+    }
+
     public void addMatch(GameRequest gameRequest) {
         matchRepository.save(modelMapper.map(gameRequest, Match.class));
     }

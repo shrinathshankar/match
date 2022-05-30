@@ -8,12 +8,11 @@
     <form>
       Username:<br> <input type="text" id="username" name="username" [(ngModel)]="username">
       <br>
-      Password:<br> <input type="password" id="password" name="password" [(ngModel)]="password" ]>
+      Password:<br> <input type="password" id="password" name="password" [(ngModel)]="password">
       <br>
-      Email:<br> <input type="email" id="email" name="email" [(ngModel)]="email" ]>
+      Email:<br> <input type="email" id="email" name="email" [(ngModel)]="email">
       <br>
-      <button class="ui-button" (click)="signUpEvent()">Submit</button>
-      <input type="submit" value="Submit">
+      <button type="submit" (click)="signUpEvent()">Submit</button>
     </form>
   </body>
 </html>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'signUp',
   templateUrl: './sign-up.component.html',
   styles: [
   ]
@@ -18,8 +18,8 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public signUpEvent() {
-    this.http.post('/add', new User(this.username, this.password, this.email))
+  signUpEvent() {
+    this.http.post('/user/add', new User(this.username, this.password, this.email))
   }
 }
 
