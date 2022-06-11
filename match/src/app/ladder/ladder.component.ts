@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { User } from '../sign-up/sign-up.component';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'ladder',
@@ -14,9 +14,36 @@ export class LadderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  allLaddersPerUser() {
-    let response = this.http.get<Ladder>('http://localhost:8080/ladder/owner/' + localStorage.getItem('owner'))
+  getHtmlLadderList() {
+    let ladderList = this.allLaddersPerUser();
+    let ladders = "";
+    for (ladder of ladderList) {
 
+    }
+  }
+
+  allLaddersPerUser(): Array<Ladder> {
+    try {
+      let response = fetch('http://localhost:8080/ladder/owner/' + localStorage.getItem('owner'),{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      response.then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${ response.status }`)
+        }
+
+        return response.blob()
+      }).then(response => {
+        response.
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
   }
 
 }
