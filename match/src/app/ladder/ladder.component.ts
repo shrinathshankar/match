@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {User} from '../sign-up/sign-up.component';
+import * as http from "http";
 
 @Component({
   selector: 'ladder',
@@ -17,33 +18,23 @@ export class LadderComponent implements OnInit {
   getHtmlLadderList() {
     let ladderList = this.allLaddersPerUser();
     let ladders = "";
-    for (ladder of ladderList) {
-
+    for ( let ladder in  ladderList) {
+      ladders+="<li> " + ladder + "</li>"
     }
   }
 
   allLaddersPerUser(): Array<Ladder> {
+    let laddersPerOwner = new Array<Ladder>();
     try {
-      let response = fetch('http://localhost:8080/ladder/owner/' + localStorage.getItem('owner'),{
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      response.then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${ response.status }`)
-        }
-
-        return response.blob()
-      }).then(response => {
-        response.
+      let response = this.http.get<Array<Ladder>>('http://localhost:8080/ladder/owner/' + localStorage.getItem('owner'))
+      response.subscribe(ladders => {
+        ladders.map(ladder => laddersPerOwner.push(ladder))
       })
 
     } catch (error) {
       console.log(error);
     }
-    return null;
+    return laddersPerOwner;
   }
 
 }

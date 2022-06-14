@@ -41,9 +41,9 @@ public class LadderController {
     }
     
     @GetMapping("/owner/{id}")
-    public ResponseEntity<List<Ladder>> getLaddersByOwner(@PathVariable long ownerId) {
+    public ResponseEntity<List<Ladder>> getLaddersByOwner(@PathVariable long id) {
         List<Ladder> ladders = new ArrayList<>();
-        Optional<List<Ladder>> optionalLadder = ladderRepository.findByOwner(ownerId);
+        Optional<List<Ladder>> optionalLadder = ladderRepository.findByOwner(id);
         return optionalLadder.map(ladder -> ResponseEntity.status(HttpStatus.OK).body(ladder)).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ladders));
     }
 }
