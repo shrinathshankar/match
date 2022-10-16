@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserResponse {
     private boolean success;
+    private long ownerId;
 }

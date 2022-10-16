@@ -19,12 +19,12 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<UserResponse> addUser(@RequestBody UserRequest userRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(personnelService.addUser(userRequest)));
+        return ResponseEntity.status(HttpStatus.OK).body(personnelService.addUser(userRequest));
     }
 
     @PostMapping("/validate")
     public ResponseEntity<UserResponse> validate(@RequestBody UserRequest userRequest) {
-        return  ResponseEntity.status(HttpStatus.OK).body(new UserResponse(personnelService.findUser(userRequest)));
+        return  ResponseEntity.status(HttpStatus.OK).body(personnelService.findUser(userRequest));
     }
 
     //add more later

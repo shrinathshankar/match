@@ -7,6 +7,7 @@ import com.match.mmr.model.request.GameRequest;
 import com.match.mmr.model.request.LadderRequest;
 import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.model.request.UserRequest;
+import com.match.mmr.model.response.UserResponse;
 import com.match.mmr.repository.MatchRepository;
 import com.match.mmr.repository.PlayerRepository;
 import com.match.mmr.repository.TeamRepository;
@@ -82,26 +83,27 @@ public class PersonnelService {
         return ImmutableList.copyOf(playerRepository.findAll().iterator());
     }
 
-    public boolean addUser(UserRequest userRequest) {
+    public UserResponse addUser(UserRequest userRequest) {
+        User user;
         try {
-            userRepository.save(modelMapper.map(userRequest, User.class));
+            user = userRepository.save(modelMapper.map(userRequest, User.class));
         } catch (Exception e) {
             log.error("{} was not unique", userRequest);
             log.error("error {}", Arrays.toString(e.getStackTrace()));
-            return false;
+            return new UserResponse(false, 0);
         }
-        return true;
+        return new UserResponse(true, user.getId());
     }
 
-    public boolean findUser(UserRequest userRequest) {
+    public UserResponse findUser(UserRequest userRequest) {
         try {
             User user = userRepository.findByUsername(userRequest.getUsername());
             if (user.getPassword().equals(userRequest.getPassword()))
-                return true;
+                return new UserResponse(true, user.getId());
         } catch (Exception e) {
             log.error("Could not find user with username: {} and matching password", userRequest.getUsername());
         }
-        return false;
+        return new UserResponse(false, 0);
     }
 
     public void addMatch(GameRequest gameRequest) {
