@@ -25,4 +25,7 @@ public class Ladder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ladderId;
 
+    @Column(name = "name")
+    private String name;
+
 }

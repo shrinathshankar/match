@@ -10,6 +10,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import { HomePageComponent } from './home-page/home-page.component';
 import { LadderComponent } from './ladder/ladder.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     routingComponent,
     HomePageComponent,
     LadderComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    LeaderboardComponent
   ],
     imports: [
         BrowserModule,

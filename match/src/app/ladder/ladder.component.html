@@ -1,8 +1,4 @@
-<html>
-  <title>
-    Ladder Home Page
-  </title>
-  <body>
-    <ul class="ladder-list">{{LadderList}}</ul>
-  </body>
-</html>
+<li *ngFor="let ladder of ladders">
+  <button type="button" (click)="onClick(ladder)">
+  </button>
+</li>

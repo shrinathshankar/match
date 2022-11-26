@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ladder")
@@ -41,9 +43,12 @@ public class LadderController {
     }
     
     @GetMapping("/owner/{id}")
-    public ResponseEntity<List<Ladder>> getLaddersByOwner(@PathVariable long id) {
-        List<Ladder> ladders = new ArrayList<>();
+    public ResponseEntity<Map<Long, Ladder>> getLaddersByOwner(@PathVariable long id) {
         Optional<List<Ladder>> optionalLadder = ladderRepository.findByOwner(id);
-        return optionalLadder.map(ladder -> ResponseEntity.status(HttpStatus.OK).body(ladder)).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ladders));
+        if (optionalLadder.isPresent()) {
+            Map<Long, Ladder> ladderMap = optionalLadder.get().stream().collect(Collectors.toMap(Ladder::getLadderId, Function.identity()));
+            return ResponseEntity.status(HttpStatus.OK).body(ladderMap);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
