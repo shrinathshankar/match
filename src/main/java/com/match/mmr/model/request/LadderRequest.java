@@ -1,20 +1,20 @@
 package com.match.mmr.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.match.mmr.model.entity.User;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerRequest {
+@Data
+public class LadderRequest {
 
-    @NotNull
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("user")
-    private User user;
+    @JsonProperty("username")
+    private String username;
+    @JsonProperty("players")
+    private List<String> playerNames;
+
 }

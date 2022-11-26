@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,22 +14,26 @@ public class Player {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "username", unique = true)
-    private String username;
-    @Column(name = "password")
-    private String password;
     @Column(name = "rating")
     private Double rating;
+    @ManyToOne
+    private User user;
+
+    @ManyToMany
+    private List<Ladder> ladders;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
     private long id;
 
-    public Player(String name, String username, String password, Double rating) {
+    public Player(String name, Double rating, User user) {
         this.name = name;
-        this.username = username;
-        this.password = password;
+        this.rating = rating;
+        this.user = user;
+    }
+    public Player(String name, Double rating) {
+        this.name = name;
         this.rating = rating;
     }
 }
