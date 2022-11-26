@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="Ladder" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="rank">
+    <th mat-header-cell *matHeaderCellDef> Rank </th>
+    <td mat-cell *matCellDef="let person"> {{person.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let person"> {{person.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="win/loss">
+    <th mat-header-cell *matHeaderCellDef> Wins/Loss </th>
+    <td mat-cell *matCellDef="let person"> {{person.wins}}/{{person.loss}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef> Rating </th>
+    <td mat-cell *matCellDef="let person"> {{person.rating}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
