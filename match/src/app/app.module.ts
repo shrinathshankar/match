@@ -11,6 +11,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LadderComponent } from './ladder/ladder.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component';
+import { MatchHistoryComponent } from './ladder/match-history/match-history.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component
     HomePageComponent,
     LadderComponent,
     LandingPageComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    MatchHistoryComponent
   ],
     imports: [
         BrowserModule,

@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class LeaderboardComponent implements OnInit {
 
   constructor() { }
-  @Input() Ladder: any;
+  @Input() Players: any;
 
   displayedColumns = ["Rank", "Name", "Win/Loss", "Rating"]
 

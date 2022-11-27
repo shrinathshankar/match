@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -18,10 +17,14 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long matchId;
 
-    @ManyToMany
-    private List<Team> teams;
+    @ManyToOne
+    private Team team1;
+    @ManyToOne
+    private Team team2;
+    @ManyToOne
+    private Team team3;
 
     @ManyToOne
-    private Ladder ladders;
+    private Team winner;
 
 }

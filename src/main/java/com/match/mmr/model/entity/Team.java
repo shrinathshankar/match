@@ -20,12 +20,9 @@ public class Team {
     @Column(name = "team_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long teamId;
-    @Column(name = "win")
-    private boolean win;
 
     public Team(Player playerOne, Player playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.win = false;
     }
 }
