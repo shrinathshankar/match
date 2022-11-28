@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "team")
 public class Team {
 
     @ManyToOne

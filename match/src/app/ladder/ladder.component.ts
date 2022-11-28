@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ladder',
@@ -11,7 +12,11 @@ export class LadderComponent implements OnInit {
 
   displayedColumns = ["Rank", "Name", "Win/Loss", "Rating"]
 
-  constructor(private http: HttpClient) { }
+  loadChild: boolean;
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.loadChild = false;
+  }
 
   ngOnInit(): void {
     this.LadderList = this.allLaddersPerUser()
@@ -29,6 +34,10 @@ export class LadderComponent implements OnInit {
       console.log(error);
     }
     return laddersPerOwner;
+  }
+
+  setLoadChild() {
+    this.loadChild = true;
   }
 
 }

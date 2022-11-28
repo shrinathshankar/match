@@ -1,4 +1,5 @@
-<li *ngFor="let ladder of ladders">
-  <button type="button" (click)="onClick(ladder)">
-  </button>
+<li *ngFor="let ladder of LadderList">
+  <button type="button" (click)="setLoadChild()">{{ladder.name}}</button>
+  <app-leaderboard [Players]="ladder.players" *ngIf="loadChild"></app-leaderboard>
+  <app-match-history [Matches]="ladder.matches" *ngIf="loadChild"></app-match-history>
 </li>
