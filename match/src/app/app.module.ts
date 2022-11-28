@@ -12,6 +12,7 @@ import { LadderComponent } from './ladder/ladder.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component';
 import { MatchHistoryComponent } from './ladder/match-history/match-history.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatchHistoryComponent } from './ladder/match-history/match-history.comp
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatTableModule
     ],
   providers: [],
   bootstrap: [AppComponent]
