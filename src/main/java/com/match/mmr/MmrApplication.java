@@ -1,8 +1,6 @@
 package com.match.mmr;
 
-import com.match.mmr.model.entity.Match;
-import com.match.mmr.model.entity.Player;
-import com.match.mmr.model.entity.Team;
+import com.match.mmr.model.entity.*;
 import com.match.mmr.repository.*;
 import com.opencsv.CSVReader;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.util.StringUtils.hasText;
 
@@ -26,15 +26,21 @@ public class MmrApplication {
 
 	@Bean
 	public String init(LadderRepository ladderRepository, MatchRepository matchRepository,
-								  PlayerRepository playerRepository, TeamRepository teamRepository, UserRepository userRepository) {
+					   PlayerRepository playerRepository, TeamRepository teamRepository, UserRepository userRepository) {
 
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		try {
+			Ladder ladder = new Ladder();
+			List<Player> players = new ArrayList<>();
+			List<Match> matches = new ArrayList<>();
+			ladder.setName("Hand and Foot");
+
 			FileReader leaderboard = new FileReader("./src/main/resources/hf_leaderboard.csv");
 			CSVReader csvLeaderboard = new CSVReader(leaderboard);
 			csvLeaderboard.forEach(person -> {
 				Player player = new Player(person[0], Double.parseDouble(person[1]), Integer.parseInt(person[2]), Integer.parseInt(person[3]));
 				playerRepository.save(player);
+				players.add(player);
 			});
 
 			FileReader matchHistory = new FileReader("./src/main/resources/hf_match_history.csv");
@@ -69,7 +75,19 @@ public class MmrApplication {
 				}
 				Match instance = new Match(one, two, three, match[0], winner);
 				matchRepository.save(instance);
+				matches.add(instance);
 			});
+
+			User user = new User();
+			user.setEmail("default");
+			user.setPassword("password");
+			user.setUsername("Jimmy");
+			userRepository.save(user);
+
+			ladder.setOwner(user);
+
+			ladderRepository.save(ladder);
+
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
