@@ -5,6 +5,7 @@ import { SignInComponent } from "./sign-in/sign-in.component";
 import { LadderComponent } from './ladder/ladder.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+
 const routes: Routes = [
   {path: 'signUp', component: SignUpComponent},
   {path: 'signIn', component: SignInComponent},
@@ -17,4 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponent = [SignUpComponent, SignInComponent]
+export const routingComponent = [SignUpComponent, SignInComponent, LadderComponent, HomePageComponent]

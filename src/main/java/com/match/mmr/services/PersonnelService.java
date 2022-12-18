@@ -8,18 +8,12 @@ import com.match.mmr.model.request.LadderRequest;
 import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.model.request.UserRequest;
 import com.match.mmr.model.response.UserResponse;
-import com.match.mmr.repository.MatchRepository;
-import com.match.mmr.repository.PlayerRepository;
-import com.match.mmr.repository.TeamRepository;
-import com.match.mmr.repository.UserRepository;
+import com.match.mmr.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static com.match.mmr.services.Calculator.changeInRating;
 import static com.match.mmr.services.Calculator.rating;
@@ -34,14 +28,16 @@ public class PersonnelService {
     private UserRepository userRepository;
     private MatchRepository matchRepository;
     private TeamRepository teamRepository;
+    private LadderRepository ladderRepository;
     private ModelMapper modelMapper;
 
     public PersonnelService(PlayerRepository playerRepository, UserRepository userRepository,
-                            MatchRepository matchRepository, TeamRepository teamRepository) {
+                            MatchRepository matchRepository, TeamRepository teamRepository, LadderRepository ladderRepository) {
         this.playerRepository = playerRepository;
         this.userRepository = userRepository;
         this.matchRepository = matchRepository;
         this.teamRepository = teamRepository;
+        this.ladderRepository = ladderRepository;
         this.modelMapper = new ModelMapper();
     }
 
@@ -98,8 +94,10 @@ public class PersonnelService {
     public UserResponse findUser(UserRequest userRequest) {
         try {
             User user = userRepository.findByUsername(userRequest.getUsername());
-            if (user.getPassword().equals(userRequest.getPassword()))
-                return new UserResponse(true, user.getId());
+            if (user.getPassword().equals(userRequest.getPassword())) {
+                UserResponse response = new UserResponse(true, user.getId());
+                return response;
+            }
         } catch (Exception e) {
             log.error("Could not find user with username: {} and matching password", userRequest.getUsername());
         }
@@ -117,5 +115,17 @@ public class PersonnelService {
         ladderRequest.getPlayerNames().forEach(name ->
                 players.add(new Player(name, DEFAULT_RATING)));
         ladder.setPlayers(players);
+    }
+
+    public List<Ladder> findLaddersByOwnerId(long id) {
+        Optional<User> user = userRepository.findById(id);
+        Map<Long, Ladder> ladderMap = new HashMap<>();
+
+        Optional<List<Ladder>> optionalLadder = Optional.empty();
+        if (user.isPresent()) {
+            optionalLadder = ladderRepository.findByOwner(user.get());
+        }
+
+        return optionalLadder.orElseGet(ArrayList::new);
     }
 }

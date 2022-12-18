@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  private signInResponse = new SignInResponse(false)
+  private signInResponse = false
 
   userForm = new UntypedFormGroup({
     username: new UntypedFormControl(''),
@@ -25,14 +25,17 @@ export class SignInComponent implements OnInit {
 
   signUpEvent() {
     let user = new User(this.userForm.get('username')?.value, this.userForm.get('password')?.value, '')
-    let response = this.http.post<SignInResponse>('http://localhost:8080/user/validate', user)
-    response.subscribe(value => console.log(value))
-    response.subscribe(value => this.signInResponse = new SignInResponse(value.success))
-    if (this.signInResponse.success) {
-      localStorage.setItem("userId", user.id)
-      this.router.navigate(['/home'])
-    }
-    //otherwise sent bad input material design
+    let response = this.http.post<any>('http://localhost:8080/user/validate', user)
+    response.subscribe(value => {
+      this.signInResponse = value.success;
+        localStorage.setItem("userId", value.ownerId);
+        localStorage.setItem("username", user.username)
+      if (value.success) {
+        this.router.navigate(['/home'])
+
+      }
+      }
+    )
   }
 }
 
@@ -48,13 +51,5 @@ export class User {
 
 }
 
-export class SignInResponse {
-  get success(): boolean {
-    return this._success;
-  }
-  private _success: boolean
-  constructor(success: boolean) {
-    this._success = success
-  }
-}
+
 

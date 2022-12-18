@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.util.StringUtils.hasText;
 
@@ -48,13 +49,33 @@ public class MmrApplication {
 			csvMatchHistory.forEach(match -> {
 				Player oneTeamOne = playerRepository.findByName(match[1]);
 				Player twoTeamOne = playerRepository.findByName(match[2]);
-				Team one = new Team(oneTeamOne, twoTeamOne);
-				teamRepository.save(one);
+				Team one;
+				List<Team> teams = teamRepository.findByPlayerOne(oneTeamOne);
+				teams.addAll(teamRepository.findByPlayerTwo(oneTeamOne));
+				teams = teams.stream().filter( team -> team.getPlayerOne().getName().equals(twoTeamOne.getName())
+						|| team.getPlayerTwo().getName().equals(twoTeamOne.getName()) )
+						.collect(Collectors.toList());
+				if (teams.isEmpty()) {
+					 one = new Team(oneTeamOne, twoTeamOne);
+					teamRepository.save(one);
+				} else {
+					one = teams.stream().findFirst().get();
+				}
 
 				Player oneTeamTwo = playerRepository.findByName(match[3]);
 				Player twoTeamTwo = playerRepository.findByName(match[4]);
-				Team two = new Team(oneTeamTwo, twoTeamTwo);
-				teamRepository.save(two);
+				Team two;
+				List<Team> teamsTwo = teamRepository.findByPlayerOne(oneTeamTwo);
+				teamsTwo.addAll(teamRepository.findByPlayerTwo(oneTeamTwo));
+				teamsTwo= teamsTwo.stream().filter( team -> team.getPlayerOne().getName().equals(twoTeamTwo.getName())
+								|| team.getPlayerTwo().getName().equals(twoTeamTwo.getName()) )
+						.collect(Collectors.toList());
+				if (teamsTwo.isEmpty()) {
+					two = new Team(oneTeamTwo, twoTeamTwo);
+					teamRepository.save(two);
+				} else {
+					two = teamsTwo.stream().findFirst().get();
+				}
 
 				Team three = null;
 				if (hasText(match[5]) && hasText(match[6])) {
@@ -85,6 +106,8 @@ public class MmrApplication {
 			userRepository.save(user);
 
 			ladder.setOwner(user);
+			ladder.setMatches(matches);
+			ladder.setPlayers(players);
 
 			ladderRepository.save(ladder);
 
@@ -93,5 +116,7 @@ public class MmrApplication {
 		}
 		return "finished initialization";
 	}
+
+
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {SignInResponse} from "../sign-in/sign-in.component";
 import {User} from "../sign-in/sign-in.component";
 import {Router} from "@angular/router";
 
@@ -12,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class SignUpComponent implements OnInit {
 
-  private signInResponse = new SignInResponse(false)
+  private signInResponse = false
 
   username: string = '';
   password: string = '';
@@ -25,10 +24,9 @@ export class SignUpComponent implements OnInit {
 
   signUpEvent() {
     let user = new User(this.username, this.password, '')
-    let response = this.http.post<SignInResponse>('http://localhost:8080/user/add', new User(this.username, this.password, this.email))
-    response.subscribe(value => console.log(value))
-    response.subscribe(value => this.signInResponse = new SignInResponse(value.success))
-    if (this.signInResponse.success) {
+    let response = this.http.post<any>('http://localhost:8080/user/add', new User(this.username, this.password, this.email))
+    response.subscribe(value => this.signInResponse =value.success)
+    if (this.signInResponse) {
       localStorage.setItem("userId", user.id)
       this.router.navigate(['/home'])
     }

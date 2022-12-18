@@ -2,6 +2,7 @@ package com.match.mmr.controller;
 
 import com.match.mmr.model.entity.Ladder;
 import com.match.mmr.model.request.LadderRequest;
+import com.match.mmr.model.response.LadderResponse;
 import com.match.mmr.repository.LadderRepository;
 import com.match.mmr.services.PersonnelService;
 import org.springframework.http.HttpStatus;
@@ -9,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ladder")
@@ -43,12 +41,9 @@ public class LadderController {
     }
     
     @GetMapping("/owner/{id}")
-    public ResponseEntity<Map<Long, Ladder>> getLaddersByOwner(@PathVariable long id) {
-        Optional<List<Ladder>> optionalLadder = ladderRepository.findByOwner(id);
-        if (optionalLadder.isPresent()) {
-            Map<Long, Ladder> ladderMap = optionalLadder.get().stream().collect(Collectors.toMap(Ladder::getLadderId, Function.identity()));
-            return ResponseEntity.status(HttpStatus.OK).body(ladderMap);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<LadderResponse> getLaddersByOwner(@PathVariable long id) {
+        LadderResponse response = new LadderResponse(personnelService.findLaddersByOwnerId(id));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 }
