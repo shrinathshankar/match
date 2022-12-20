@@ -4,13 +4,15 @@ import { SignUpComponent } from './sign-up/sign-up.component'
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { LadderComponent } from './ladder/ladder.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import {LandingPageComponent} from "./landing-page/landing-page.component";
 
 
 const routes: Routes = [
   {path: 'signUp', component: SignUpComponent},
   {path: 'signIn', component: SignInComponent},
   {path: 'ladder', component: LadderComponent},
-  {path: 'home', component: HomePageComponent}
+  {path: 'home', component: HomePageComponent},
+  {path: '', component: LandingPageComponent}
 ];
 
 @NgModule({
@@ -18,4 +20,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponent = [SignUpComponent, SignInComponent, LadderComponent, HomePageComponent]
+export const routingComponent = [SignUpComponent, SignInComponent, LadderComponent, HomePageComponent, LandingPageComponent]

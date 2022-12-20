@@ -10,7 +10,7 @@ export class MatchHistoryComponent implements OnInit {
   constructor() { }
   @Input() Matches: any;
 
-  displayedColumns = ["Winner", "Team 1", "Team 2", "Team 3"]
+  displayedColumns = ["Winner", "Team 1", "Team 2"]
 
   ngOnInit(): void {
   }

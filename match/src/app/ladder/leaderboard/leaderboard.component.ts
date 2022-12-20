@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import Timeout = NodeJS.Timeout;
+import {delay} from "rxjs";
 
 @Component({
   selector: 'app-leaderboard',
@@ -10,9 +12,15 @@ export class LeaderboardComponent implements OnInit {
   constructor() { }
   @Input() Players: any;
 
-  displayedColumns = ["Rank", "Name", "Win/Loss", "Rating"]
+  displayedColumns = ["Name", "Win/Loss", "Rating"]
 
   ngOnInit(): void {
+
+  }
+
+
+  toggle(e: HTMLElement) {
+    e.classList.toggle('hidden');
   }
 
 }

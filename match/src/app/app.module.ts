@@ -13,6 +13,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component';
 import { MatchHistoryComponent } from './ladder/match-history/match-history.component';
 import { MatTableModule } from '@angular/material/table';
+import {MaterialModule} from "./material-module";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MatTableModule } from '@angular/material/table';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTableModule
+        MatTableModule,
+        MaterialModule
     ],
   providers: [],
   bootstrap: [AppComponent]

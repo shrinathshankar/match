@@ -20,9 +20,5 @@ export class LadderComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-
-
-
 }
 

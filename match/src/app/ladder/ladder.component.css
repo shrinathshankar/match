@@ -1,0 +1,26 @@
+
+
+h1{
+  font-family: sans-serif;
+}
+
+h2{
+  font-family: sans-serif;
+}
+h3{
+  font-family: sans-serif;
+}
+
+body{
+  background-color: #2C2F33;
+}
+
+div{
+  background-color: #2C2F33;
+  color: whitesmoke;
+  font-family: sans-serif;
+}
+
+.hidden {
+  display: none;
+}
