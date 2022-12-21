@@ -1,21 +1,26 @@
-<h3>Matches</h3>
-<table mat-table [dataSource]="Matches" class="mat-elevation-z8">
+<button (click)="toggle(matches)" class="btn">Matches</button>
+<br>
+<div #matches>
 
-  <ng-container matColumnDef="Winner">
-    <th mat-header-cell *matHeaderCellDef> Winner </th>
-    <td mat-cell *matCellDef="let match"> {{match.winner.playerOne.name}}, {{match.winner.playerTwo.name}} </td>
-  </ng-container>
+  <table mat-table [dataSource]="Matches" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="Team 1">
-    <th mat-header-cell *matHeaderCellDef> Team 1 </th>
-    <td mat-cell *matCellDef="let match"> {{match.team1.playerOne.name}}, {{match.team1.playerTwo.name}} <br> </td>
-  </ng-container>
+    <ng-container matColumnDef="Winner">
+      <th mat-header-cell *matHeaderCellDef> Winner </th>
+      <td mat-cell *matCellDef="let match"> {{match.winner.playerOne.name}}, {{match.winner.playerTwo.name}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Team 2">
-    <th mat-header-cell *matHeaderCellDef> Team 2 </th>
-    <td mat-cell *matCellDef="let match"> {{match.team2.playerOne.name}}, {{match.team2.playerTwo.name}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Team 1">
+      <th mat-header-cell *matHeaderCellDef> Team 1 </th>
+      <td mat-cell *matCellDef="let match"> {{match.team1.playerOne.name}}, {{match.team1.playerTwo.name}} <br> </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="Team 2">
+      <th mat-header-cell *matHeaderCellDef> Team 2 </th>
+      <td mat-cell *matCellDef="let match"> {{match.team2.playerOne.name}}, {{match.team2.playerTwo.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

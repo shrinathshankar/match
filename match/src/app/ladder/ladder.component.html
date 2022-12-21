@@ -1,9 +1,10 @@
 <html>
   <div *ngIf="LadderList" class="match-bod">
     <div *ngFor="let ladder of LadderList.ladders">
-        <h3>{{ladder.name}}</h3>
-        <app-leaderboard [Players]="ladder.players" class="mat-tree-node"></app-leaderboard>
-        <app-match-history [Matches]="ladder.matches" ></app-match-history>
+      <h1>{{ladder.name}}</h1>
+      <app-leaderboard [Players]="ladder.players" class="mat-tree-node"></app-leaderboard>
+      <br>
+      <app-match-history [Matches]="ladder.matches" ></app-match-history>
     </div>
   </div>
 </html>

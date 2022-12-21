@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import Timeout = NodeJS.Timeout;
 import {delay} from "rxjs";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {UserComponent} from "./user/user.component";
 
 @Component({
   selector: 'app-leaderboard',
@@ -9,7 +11,7 @@ import {delay} from "rxjs";
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
   @Input() Players: any;
 
   displayedColumns = ["Name", "Win/Loss", "Rating"]
@@ -23,4 +25,14 @@ export class LeaderboardComponent implements OnInit {
     e.classList.toggle('hidden');
   }
 
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      desc: ""
+    }
+    dialogConfig.maxWidth = "500px";
+    this.dialog.open(UserComponent, dialogConfig);
+  }
 }

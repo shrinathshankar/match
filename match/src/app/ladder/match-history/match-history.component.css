@@ -1,0 +1,28 @@
+.hidden {
+  display: none;
+}
+div{
+  padding: 2%;
+  background-color: #213951;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.btn {
+  border-radius: 5px 5px 5px 5px;
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 23px;
+  font-family: sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  color: whitesmoke;
+}
+
+h1 {
+  position: center;
+  text-align: center;
+}
+
+/* On mouse-over */
+.btn:hover {background: #386087;}

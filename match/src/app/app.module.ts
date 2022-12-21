@@ -14,6 +14,9 @@ import { LeaderboardComponent } from './ladder/leaderboard/leaderboard.component
 import { MatchHistoryComponent } from './ladder/match-history/match-history.component';
 import { MatTableModule } from '@angular/material/table';
 import {MaterialModule} from "./material-module";
+import { UserComponent } from './ladder/leaderboard/user/user.component';
+import { MatIconModule} from "@angular/material/icon";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import {MaterialModule} from "./material-module";
     LadderComponent,
     LandingPageComponent,
     LeaderboardComponent,
-    MatchHistoryComponent
+    MatchHistoryComponent,
+    UserComponent
   ],
     imports: [
         BrowserModule,
@@ -35,7 +39,9 @@ import {MaterialModule} from "./material-module";
         FormsModule,
         ReactiveFormsModule,
         MatTableModule,
-        MaterialModule
+        MaterialModule,
+        MatIconModule,
+        BrowserAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

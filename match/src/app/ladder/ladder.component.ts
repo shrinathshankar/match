@@ -20,5 +20,9 @@ export class LadderComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  toggle(e: HTMLElement) {
+    e.classList.toggle('hidden');
+  }
 }
 

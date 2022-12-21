@@ -119,7 +119,6 @@ public class PersonnelService {
 
     public List<Ladder> findLaddersByOwnerId(long id) {
         Optional<User> user = userRepository.findById(id);
-        Map<Long, Ladder> ladderMap = new HashMap<>();
 
         Optional<List<Ladder>> optionalLadder = Optional.empty();
         if (user.isPresent()) {

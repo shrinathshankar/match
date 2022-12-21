@@ -15,4 +15,7 @@ export class MatchHistoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggle(e: HTMLElement) {
+    e.classList.toggle('hidden');
+  }
 }
