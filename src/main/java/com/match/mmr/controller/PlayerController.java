@@ -1,5 +1,6 @@
 package com.match.mmr.controller;
 
+import com.match.mmr.model.request.CreatePlayerRequest;
 import com.match.mmr.model.request.PlayerRequest;
 import com.match.mmr.model.response.PlayersResponse;
 import com.match.mmr.services.PersonnelService;
@@ -19,6 +20,12 @@ public class PlayerController {
     @PostMapping("/add")
     public ResponseEntity<Integer> addPlayer(@RequestBody PlayerRequest playerRequest) {
         personnelService.addPlayer(playerRequest);
+        return ResponseEntity.ok().body(200);
+    }
+
+    @PostMapping("/add/ladder")
+    public ResponseEntity<Integer> addPlayerInLadder(@RequestBody CreatePlayerRequest playerRequest) {
+        personnelService.addPlayerWithLadder(playerRequest);
         return ResponseEntity.ok().body(200);
     }
 

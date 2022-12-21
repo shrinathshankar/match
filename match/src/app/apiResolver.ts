@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Injectable} from "@angular/core";
+import {CreatePlayer} from "./ladder/leaderboard/user/user.component";
 
 
 @Injectable({
@@ -17,5 +18,10 @@ export class ApiResolver {
 
   setData(data: any) {
     this.apiData.next(data);
+  }
+
+  createPlayerInLadder(name: string, ladderId: string) : Observable<any> {
+    let player = new CreatePlayer(name, ladderId);
+    return this.http.post<any>('http://localhost:8080/player/add/ladder', player)
   }
 }

@@ -3,10 +3,7 @@ package com.match.mmr.services;
 import com.google.common.collect.ImmutableList;
 import com.match.mmr.model.TeamDto;
 import com.match.mmr.model.entity.*;
-import com.match.mmr.model.request.GameRequest;
-import com.match.mmr.model.request.LadderRequest;
-import com.match.mmr.model.request.PlayerRequest;
-import com.match.mmr.model.request.UserRequest;
+import com.match.mmr.model.request.*;
 import com.match.mmr.model.response.UserResponse;
 import com.match.mmr.repository.*;
 import lombok.extern.slf4j.Slf4j;
@@ -69,6 +66,19 @@ public class PersonnelService {
     public void addPlayer(PlayerRequest playerRequest) {
         Player player = new Player(playerRequest.getName(), DEFAULT_RATING, playerRequest.getUser());
         playerRepository.save(player);
+    }
+
+    public void addPlayerWithLadder(CreatePlayerRequest request) {
+        Player player = new Player(request.getName(), DEFAULT_RATING);
+        playerRepository.save(player);
+        Optional<Ladder> optionalLadder = ladderRepository.findById(Long.parseLong(request.getLadderId()));
+        if (optionalLadder.isPresent()) {
+            Ladder ladder = optionalLadder.get();
+            List<Player> players = ladder.getPlayers();
+            players.add(player);
+            ladder.setPlayers(players);
+            ladderRepository.save(ladder);
+        }
     }
 
     public List<Player> getPlayer(PlayerRequest request) {

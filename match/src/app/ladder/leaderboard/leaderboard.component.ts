@@ -13,6 +13,7 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
   @Input() Players: any;
+  @Input() ladderId: any;
 
   displayedColumns = ["Name", "Win/Loss", "Rating"]
 
@@ -30,7 +31,8 @@ export class LeaderboardComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      desc: ""
+      desc: "",
+      ladderId: this.ladderId
     }
     dialogConfig.maxWidth = "500px";
     this.dialog.open(UserComponent, dialogConfig);
