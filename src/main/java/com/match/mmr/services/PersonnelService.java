@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.match.mmr.services.Calculator.changeInRating;
 import static com.match.mmr.services.Calculator.rating;
@@ -19,7 +20,7 @@ import static com.match.mmr.services.Calculator.rating;
 @Slf4j
 public class PersonnelService {
 
-    private Double DEFAULT_RATING = 1000.0;
+    private Double DEFAULT_RATING = 300.0;
 
     private PlayerRepository playerRepository;
     private UserRepository userRepository;
@@ -134,6 +135,16 @@ public class PersonnelService {
         if (user.isPresent()) {
             optionalLadder = ladderRepository.findByOwner(user.get());
         }
+
+        optionalLadder.ifPresent(ladders ->
+                ladders.forEach(ladder -> {
+                    List<Player> sortedPlayers = ladder.getPlayers()
+                            .stream()
+                            .sorted(Comparator.comparing(Player::getRating))
+                            .collect(Collectors.toList());
+                    Collections.reverse(sortedPlayers);
+            ladder.setPlayers(sortedPlayers);
+        }));
 
         return optionalLadder.orElseGet(ArrayList::new);
     }

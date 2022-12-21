@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Add Player</h2>
 <mat-dialog-content [formGroup]="playerForm">
   <mat-form-field>
-    <input matInput placeholder="Name" >
+    <input matInput placeholder="Name" type="text" formControlName="name" name="name">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

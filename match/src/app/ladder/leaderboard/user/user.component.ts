@@ -17,12 +17,11 @@ export class UserComponent implements OnInit{
     name: new UntypedFormControl('')
   });
 
-  constructor(private fb: FormBuilder,
-              private dialogRef: MatDialogRef<UserComponent>,
+  constructor(private dialogRef: MatDialogRef<UserComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
               private apiResolver: ApiResolver) {
     this.name = data.desc;
-    this.name = data.ladderId;
+    this.ladderId = data.ladderId;
   }
 
   ngOnInit(): void {
