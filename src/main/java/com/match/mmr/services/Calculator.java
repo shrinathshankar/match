@@ -1,7 +1,7 @@
 package com.match.mmr.services;
 
 
-import com.match.mmr.model.TeamDto;
+import com.match.mmr.model.entity.Team;
 
 public class Calculator {
 
@@ -13,12 +13,12 @@ public class Calculator {
         return (score - expectedScore)*10;
     }
 
-    public static double avgTeamRating(TeamDto team) {
+    public static double avgTeamRating(Team team) {
         return (team.getPlayerOne().getRating() + team.getPlayerTwo().getRating())/2;
     }
 
-    public static double changeInRating(TeamDto one, TeamDto two) {
-        return kFactor(one.isWin()? 1: 0, expectedScore(avgTeamRating(one), avgTeamRating(two)));
+    public static double changeInRating(Team one, Team two, boolean oneWin) {
+        return kFactor(oneWin? 1: 0, expectedScore(avgTeamRating(one), avgTeamRating(two)));
     }
 
     public static double rating(double playerRating, double change, boolean isWin) {

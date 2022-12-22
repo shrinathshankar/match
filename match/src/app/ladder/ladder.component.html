@@ -4,7 +4,7 @@
       <h1>{{ladder.name}}</h1>
       <app-leaderboard [Players]="ladder.players" [ladderId]="ladder.ladderId"  class="mat-tree-node"></app-leaderboard>
       <br>
-      <app-match-history [Matches]="ladder.matches" ></app-match-history>
+      <app-match-history [Matches]="ladder.matches" [ladderId]="ladder.ladderId" ></app-match-history>
     </div>
   </div>
 </html>

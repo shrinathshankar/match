@@ -15,4 +15,7 @@ public class GameRequest {
 
     @JsonProperty("teams")
     private List<TeamDto> teams;
+
+    @JsonProperty("ladderId")
+    private String ladderId;
 }

@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Add Match</h2>
+<mat-dialog-content [formGroup]="playerForm">
+  Team 1:<mat-checkbox #one [disabled]="checked" (click)="check()"> Winner?</mat-checkbox>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="team1player1" name="team1player1">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="team1player2" name="team1player2">
+  </mat-form-field>
+  Team 2:<mat-checkbox #two [disabled]="checked" (click)="check()"> Winner?</mat-checkbox>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="team2player1" name="team2player1">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="team2player2" name="team2player2">
+  </mat-form-field>
+<!--  Team 3:<mat-checkbox id="team3" [disabled]="checked" (click)="check()"> Winner?</mat-checkbox>-->
+<!--  <br>-->
+<!--  <mat-form-field>-->
+<!--    <input matInput placeholder="Name" type="text" formControlName="team3player1" name="team3player1">-->
+<!--  </mat-form-field>-->
+<!--  <mat-form-field>-->
+<!--    <input matInput placeholder="Name" type="text" formControlName="team3player2" name="team3player2">-->
+<!--  </mat-form-field>-->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="mat-raised-button" (click)="save()">Save</button>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

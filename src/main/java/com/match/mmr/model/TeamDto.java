@@ -1,7 +1,6 @@
 package com.match.mmr.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.match.mmr.model.entity.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TeamDto {
     @JsonProperty("playerOne")
-    private Player playerOne;
+    private String playerOne;
     @JsonProperty("playerTwo")
-    private Player playerTwo;
+    private String playerTwo;
     @JsonProperty("win")
     private boolean win;
 }

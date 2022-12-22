@@ -24,4 +24,9 @@ export class ApiResolver {
     let player = new CreatePlayer(name, ladderId);
     return this.http.post<any>('http://localhost:8080/player/add/ladder', player)
   }
+
+  createGameInLadder(data: any) : Observable<any> {
+    console.table(data);
+    return this.http.post<any>('http://localhost:8080/match/add', data);
+  }
 }

@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.match.mmr.services.Calculator.changeInRating;
-import static com.match.mmr.services.Calculator.rating;
-
 @Service
 @Slf4j
 public class PersonnelService {
@@ -52,17 +49,19 @@ public class PersonnelService {
             return teams;
     }
 
-    public void newRating(List<TeamDto> teams) {
-
-        double change = changeInRating(teams.get(0), teams.get(1));
-        teams.forEach(team -> {
-            team.getPlayerOne().setRating(rating(team.getPlayerOne().getRating(), change, team.isWin()));
-            team.getPlayerTwo().setRating(rating(team.getPlayerTwo().getRating(), change, team.isWin()));
-            playerRepository.save(modelMapper.map(team.getPlayerOne(), Player.class));
-            playerRepository.save(modelMapper.map(team.getPlayerTwo(), Player.class));
-        });
-
-    }
+//    public void newRating(List<TeamDto> teams) {
+//
+//        double change = changeInRating(teams.get(0), teams.get(1), teams.get(0).isWin());
+//        teams.forEach(team -> {
+//            Player playerOne = playerRepository.findByName(team.getPlayerOne());
+//            playerOne.setRating(rating(playerOne.getRating(), change, team.isWin()));
+//            Player playerTwo = playerRepository.findByName(team.getPlayerOne());
+//            playerTwo.setRating(rating(playerTwo.getRating(), change, team.isWin()));
+//            playerRepository.save(modelMapper.map(team.getPlayerOne(), Player.class));
+//            playerRepository.save(modelMapper.map(team.getPlayerTwo(), Player.class));
+//        });
+//
+//    }
 
     public void addPlayer(PlayerRequest playerRequest) {
         Player player = new Player(playerRequest.getName(), DEFAULT_RATING, playerRequest.getUser());
@@ -116,7 +115,24 @@ public class PersonnelService {
     }
 
     public void addMatch(GameRequest gameRequest) {
-        matchRepository.save(modelMapper.map(gameRequest, Match.class));
+        Match match = new Match();
+
+        match.setTeam1(findPlayers(gameRequest.getTeams().get(0)));
+        match.setTeam2(findPlayers(gameRequest.getTeams().get(1)));
+        match.setWinner(gameRequest.getTeams().get(0).isWin()? match.getTeam1(): match.getTeam2());
+        matchRepository.save(match);
+        Ladder ladder = ladderRepository.findById(Long.valueOf(gameRequest.getLadderId())).get();
+        List<Match> matches = ladder.getMatches();
+        matches.add(match);
+        ladder.setMatches(matches);
+        ladderRepository.save(ladder);
+    }
+
+    public Team findPlayers(TeamDto team) {
+        Player oneTeamOne = playerRepository.findByName(team.getPlayerOne());
+        Player twoTeamOne = playerRepository.findByName(team.getPlayerTwo());
+        return teamRepository.save(new Team(oneTeamOne, twoTeamOne));
+
     }
 
     public void createLadder(LadderRequest ladderRequest) {
