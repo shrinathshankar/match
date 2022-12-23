@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -14,7 +12,7 @@ public class LadderRequest {
 
     @JsonProperty("username")
     private String username;
-    @JsonProperty("players")
-    private List<String> playerNames;
+    @JsonProperty("name")
+    private String name;
 
 }

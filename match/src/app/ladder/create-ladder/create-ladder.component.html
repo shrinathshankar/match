@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Create New Ladder</h2>
+<mat-dialog-content [formGroup]="ladderForm">
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="name" name="name">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="createLadder()">Save</button>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

@@ -31,7 +31,7 @@ export class UserComponent implements OnInit{
   save() {
     this.apiResolver.createPlayerInLadder(this.playerForm.get('name')?.value, this.ladderId).subscribe(
       data => {
-        if (data.status === 200) {
+        if (data === 200) {
           console.log("player created")
           window.location.reload();
         } else {
@@ -40,7 +40,6 @@ export class UserComponent implements OnInit{
       }
     );
     this.dialogRef.close(this.playerForm.value);
-    window.location.reload();
   }
 
   close() {

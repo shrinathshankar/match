@@ -138,10 +138,8 @@ public class PersonnelService {
     public void createLadder(LadderRequest ladderRequest) {
         Ladder ladder = new Ladder();
         ladder.setOwner(userRepository.findByUsername(ladderRequest.getUsername()));
-        List<Player> players = new ArrayList<>();
-        ladderRequest.getPlayerNames().forEach(name ->
-                players.add(new Player(name, DEFAULT_RATING)));
-        ladder.setPlayers(players);
+        ladder.setName(ladderRequest.getName());
+        ladderRepository.save(ladder);
     }
 
     public List<Ladder> findLaddersByOwnerId(long id) {

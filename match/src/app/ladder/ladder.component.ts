@@ -1,6 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {ApiResolver} from "../apiResolver";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {UserComponent} from "./leaderboard/user/user.component";
+import {CreateLadderComponent} from "./create-ladder/create-ladder.component";
 
 @Component({
   selector: 'ladder',
@@ -14,7 +18,7 @@ export class LadderComponent implements OnInit {
   displayedColumns = ["Rank", "Name", "Win/Loss", "Rating"]
 
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -24,5 +28,19 @@ export class LadderComponent implements OnInit {
   toggle(e: HTMLElement) {
     e.classList.toggle('hidden');
   }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      desc: "",
+    }
+    dialogConfig.maxWidth = "500px";
+    this.dialog.open(CreateLadderComponent, dialogConfig);
+  }
+
 }
+
+
 

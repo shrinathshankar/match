@@ -18,6 +18,7 @@ import { UserComponent } from './ladder/leaderboard/user/user.component';
 import { MatIconModule} from "@angular/material/icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MatchComponent } from './ladder/match-history/match/match.component';
+import { CreateLadderComponent } from './ladder/create-ladder/create-ladder.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatchComponent } from './ladder/match-history/match/match.component';
     LeaderboardComponent,
     MatchHistoryComponent,
     UserComponent,
-    MatchComponent
+    MatchComponent,
+    CreateLadderComponent
   ],
     imports: [
         BrowserModule,

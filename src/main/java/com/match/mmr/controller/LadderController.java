@@ -25,8 +25,9 @@ public class LadderController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.OK)
-    public void createLadder(@RequestBody LadderRequest ladderRequest){
+    public ResponseEntity<Integer> createLadder(@RequestBody LadderRequest ladderRequest){
         personnelService.createLadder(ladderRequest);
+        return ResponseEntity.ok().body(200);
     }
 
     @GetMapping("/{id}")

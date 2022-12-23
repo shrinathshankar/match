@@ -27,3 +27,17 @@ div{
 .hidden {
   display: none;
 }
+
+.mat-raised-button {
+  font-family: sans-serif !important;
+}
+
+#middle {
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  child-align: middle;
+  horiz-align: center;
+  align-self: center;
+}
+

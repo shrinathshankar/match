@@ -25,10 +25,14 @@ export class SignUpComponent implements OnInit {
   signUpEvent() {
     let user = new User(this.username, this.password, '')
     let response = this.http.post<any>('http://localhost:8080/user/add', new User(this.username, this.password, this.email))
-    response.subscribe(value => this.signInResponse =value.success)
-    if (this.signInResponse) {
-      localStorage.setItem("userId", user.id)
-      this.router.navigate(['/home'])
-    }
+    response.subscribe(value => {
+      this.signInResponse =value.success
+      if (this.signInResponse) {
+        localStorage.setItem("userId", user.id)
+        localStorage.setItem("username", user.username);
+        this.router.navigate(['/home'])
+      }
+    })
+
   }
 }
