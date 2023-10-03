@@ -31,7 +31,7 @@ export class LadderComponent implements OnInit {
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       desc: "",
